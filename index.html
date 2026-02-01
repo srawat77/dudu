@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>My Valentine 💖</title>
+<title> a cho cho, cho cho, a cho cho 💖</title>
 <style>
 body {
   margin: 0;
@@ -61,7 +61,8 @@ button:hover { transform: scale(1.1); }
   display: none;
   max-width: 700px;
   margin: 30px auto;
-  font-size: 20px;
+  font-size: 28px;        /* bigger font */
+  font-weight: bold;      /* bold text */
   color: #b3005e;
   line-height: 1.6;
   white-space: pre-line;
@@ -127,7 +128,6 @@ button:hover { transform: scale(1.1); }
 <!-- Teddy GIF -->
 <img id="teddy" src="https://media.tenor.com/Zyy0GHeC7d0AAAAd/shakespaw.gif" alt="Cute Teddy">
 
-
 <!-- Heart flying animation -->
 <div id="wave-heart"></div>
 
@@ -136,7 +136,7 @@ button:hover { transform: scale(1.1); }
 
 <!-- Background music -->
 <audio id="bgMusic" loop>
-  <source src="carry_you_home.mp3.mpeg" type="audio/mpeg">
+  <source src="carry_you_home.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -147,11 +147,10 @@ const waveHeart = document.getElementById("wave-heart");
 const message = document.getElementById("message");
 const bgMusic = document.getElementById("bgMusic");
 
-// Start music when user clicks anywhere
+// Start music on first click anywhere
 document.body.addEventListener('click', () => {
   bgMusic.play().catch(() => {});
-}, { once: true }); // once=true ensures it only triggers once
-
+}, { once: true });
 
 // Floating hearts
 function createHeart() {
@@ -201,16 +200,23 @@ function createConfetti() {
   }
 }
 
+// Track if message already typed
+let messageTyped = false;
+
 // Yes button click
 yesBtn.addEventListener("click", () => {
-  bgMusic.play(); // start music
+  bgMusic.play(); // music starts
   teddy.style.display = "block";
   waveHeart.style.opacity = 1;
   waveHeart.style.animation = "wave 1s ease forwards";
   setTimeout(() => { waveHeart.style.opacity = 0; }, 1200);
   createConfetti();
   message.style.display = "block";
-  typeMessage(loveMessage, message);
+  
+  if (!messageTyped) {
+    typeMessage(loveMessage, message);
+    messageTyped = true;
+  }
 });
 </script>
 </body>
