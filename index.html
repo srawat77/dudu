@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>My Valentine 💖</title>
-
 <style>
 body {
   margin: 0;
@@ -38,9 +37,7 @@ button {
   color: white;
 }
 
-button:hover {
-  transform: scale(1.1);
-}
+button:hover { transform: scale(1.1); }
 
 #teddy {
   display: none;
@@ -53,18 +50,11 @@ button:hover {
   position: absolute;
   width: 50px;
   height: 50px;
-  background: url('https://tenor.com/bPCRTk5ikZC.gif') no-repeat center/contain;
+  background: url('https://i.imgur.com/Ok8Y3E5.png') no-repeat center/contain;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
-  animation: wave 1s ease forwards;
-}
-
-@keyframes wave {
-  0% { top: 0; opacity: 0; transform: translateX(-50%) scale(0); }
-  50% { top: -150px; opacity: 1; transform: translateX(-50%) scale(1.2); }
-  100% { top: -200px; opacity: 0; transform: translateX(-50%) scale(0); }
 }
 
 #message {
@@ -96,15 +86,8 @@ button:hover {
   border-radius: 50%;
 }
 
-.heart::before {
-  top: -10px;
-  left: 0;
-}
-
-.heart::after {
-  left: 10px;
-  top: 0;
-}
+.heart::before { top: -10px; left: 0; }
+.heart::after { left: 10px; top: 0; }
 
 @keyframes float {
   0% { transform: translateY(0) rotate(-45deg); opacity: 1; }
@@ -115,23 +98,24 @@ button:hover {
   position: absolute;
   width: 10px;
   height: 10px;
-  background-color: #ff2f92;
   top: 0;
   animation: fall 3s linear forwards;
+  border-radius: 50%;
 }
 
 @keyframes fall {
   0% { transform: translateY(0) rotate(0deg); opacity: 1; }
   100% { transform: translateY(1000px) rotate(360deg); opacity: 0; }
 }
+
+@keyframes wave {
+  0% { top: 0; opacity: 0; transform: translateX(-50%) scale(0); }
+  50% { top: -150px; opacity: 1; transform: translateX(-50%) scale(1.2); }
+  100% { top: -200px; opacity: 0; transform: translateX(-50%) scale(0); }
+}
 </style>
 </head>
-
 <body>
-
-<audio autoplay loop>
-  <source src="carry_you_home.mp3" type="audio/mpeg">
-</audio>
 
 <h1>Will you be my Valentine? 💖</h1>
 
@@ -140,9 +124,20 @@ button:hover {
   <button id="noBtn">No</button>
 </div>
 
-<img id="teddy" src="https://i.imgur.com/6ZK3GxT.png" alt="Cute Teddy">
+<!-- Teddy GIF -->
+<img id="teddy" src="https://media.tenor.com/Zyy0GHeC7d0AAAAd/shakespaw.gif" alt="Cute Teddy">
+
+
+<!-- Heart flying animation -->
 <div id="wave-heart"></div>
+
+<!-- Message -->
 <div id="message"></div>
+
+<!-- Background music -->
+<audio id="bgMusic" loop>
+  <source src="carry_you_home.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 const noBtn = document.getElementById("noBtn");
@@ -150,6 +145,7 @@ const yesBtn = document.getElementById("yesBtn");
 const teddy = document.getElementById("teddy");
 const waveHeart = document.getElementById("wave-heart");
 const message = document.getElementById("message");
+const bgMusic = document.getElementById("bgMusic");
 
 // Floating hearts
 function createHeart() {
@@ -201,17 +197,14 @@ function createConfetti() {
 
 // Yes button click
 yesBtn.addEventListener("click", () => {
+  bgMusic.play(); // music starts
   teddy.style.display = "block";
-  waveHeart.style.opacity = 1; // start heart animation
+  waveHeart.style.opacity = 1;
+  waveHeart.style.animation = "wave 1s ease forwards";
+  setTimeout(() => { waveHeart.style.opacity = 0; }, 1200);
   createConfetti();
   message.style.display = "block";
   typeMessage(loveMessage, message);
-
-  // Animate wave heart
-  waveHeart.style.animation = "wave 1s ease forwards";
-  setTimeout(() => {
-    waveHeart.style.opacity = 0;
-  }, 1200);
 });
 </script>
 </body>
