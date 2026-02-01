@@ -147,6 +147,12 @@ const waveHeart = document.getElementById("wave-heart");
 const message = document.getElementById("message");
 const bgMusic = document.getElementById("bgMusic");
 
+// Start music when user clicks anywhere
+document.body.addEventListener('click', () => {
+  bgMusic.play().catch(() => {});
+}, { once: true }); // once=true ensures it only triggers once
+
+
 // Floating hearts
 function createHeart() {
   const heart = document.createElement("div");
@@ -197,7 +203,7 @@ function createConfetti() {
 
 // Yes button click
 yesBtn.addEventListener("click", () => {
-  bgMusic.play(); // music starts
+  bgMusic.play(); // start music
   teddy.style.display = "block";
   waveHeart.style.opacity = 1;
   waveHeart.style.animation = "wave 1s ease forwards";
